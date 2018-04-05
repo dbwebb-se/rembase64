@@ -119,7 +119,7 @@ http.createServer(function route(req, res) {
 		})
 		res.end(JSON.stringify({message: e.message, stack: e.stack}, null, 2))
 	}
-}).listen(process.env.PORT || 8000)
+}).listen(process.env.PORT || 8222)
 
 function getData(cookieString) {
 	var cookieData = data
