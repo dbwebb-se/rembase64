@@ -38,7 +38,7 @@ https.createServer(function route(req, res) {
 		if (req.method === "GET") {
 			res.writeHead(200, {
 				"Content-Type": "application/json",
-				"Access-Control-Allow-Origin": req.headers.origin,
+				"Access-Control-Allow-Origin": "*",
 				"Access-Control-Allow-Credentials": "true",
 			})
 			var offset = isNaN(parseInt(q.offset, 10)) ? 0 : parseInt(q.offset, 10)
@@ -74,7 +74,7 @@ https.createServer(function route(req, res) {
 						res.writeHead(200, {
 							"Content-Type": "application/json",
 							"Set-Cookie": output,
-							"Access-Control-Allow-Origin": req.headers.origin,
+							"Access-Control-Allow-Origin": "*",
 							"Access-Control-Allow-Credentials": "true",
 						})
 						res.end(JSON.stringify(item, null, 2))
@@ -85,7 +85,7 @@ https.createServer(function route(req, res) {
 						res.writeHead(500, {
 							"Content-Type": "application/json",
 							"Set-Cookie": output,
-							"Access-Control-Allow-Origin": req.headers.origin,
+							"Access-Control-Allow-Origin": "*",
 							"Access-Control-Allow-Credentials": "true",
 						})
 						res.end(JSON.stringify({message: error.message, stack: e.stack}, null, 2))
@@ -95,7 +95,7 @@ https.createServer(function route(req, res) {
 					// console.log(e)
 					res.writeHead((e && e.method) || 400, {
 						"Content-Type": "application/json",
-						"Access-Control-Allow-Origin": req.headers.origin,
+						"Access-Control-Allow-Origin": "*",
 						"Access-Control-Allow-Credentials": "true",
 					})
 					res.end(JSON.stringify({message: e.message, stack: e.stack}, null, 2))
@@ -104,7 +104,7 @@ https.createServer(function route(req, res) {
 		}
 		else if (req.method === "OPTIONS") {
 			res.writeHead(200, {
-				"Access-Control-Allow-Origin": req.headers.origin,
+				"Access-Control-Allow-Origin": "*",
 				"Access-Control-Allow-Credentials": "true",
 				"Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS",
 				"Access-Control-Allow-Headers": "Content-Type,Rem-Response-Status",
@@ -117,7 +117,7 @@ https.createServer(function route(req, res) {
 	catch (e) {
 		res.writeHead(e.method || 400, {
 			"Content-Type": "application/json",
-			"Access-Control-Allow-Origin": req.headers.origin,
+			"Access-Control-Allow-Origin": "*",
 			"Access-Control-Allow-Credentials": "true",
 		})
 		res.end(JSON.stringify({message: e.message, stack: e.stack}, null, 2))
