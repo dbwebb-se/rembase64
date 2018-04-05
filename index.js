@@ -1,4 +1,4 @@
-var http = require("http")
+var https = require("https")
 var url = require("url")
 var querystring = require("querystring")
 
@@ -10,7 +10,7 @@ var HttpError = require("./HttpError")
 var home = require("fs").readFileSync("index.html", "utf-8")
 var data = require("./data.json")
 
-http.createServer(function route(req, res) {
+https.createServer(function route(req, res) {
 	var u = url.parse(req.url)
 	var q = u.search ? querystring.parse(u.search.slice(1)) : {}
 	var args = u.pathname.match(/\/(api)\/([^\/]+)(?:\/([^\/]+))?/) // `/api/:collection/:id`
@@ -32,10 +32,13 @@ http.createServer(function route(req, res) {
 		var db = getData(req.headers.cookie)
 		var items = db[key] || []
 		req.method = req.method.toUpperCase()
+
+
+
 		if (req.method === "GET") {
 			res.writeHead(200, {
 				"Content-Type": "application/json",
-				"Access-Control-Allow-Origin": "*",
+				"Access-Control-Allow-Origin": req.headers.origin,
 				"Access-Control-Allow-Credentials": "true",
 			})
 			var offset = isNaN(parseInt(q.offset, 10)) ? 0 : parseInt(q.offset, 10)
@@ -71,7 +74,7 @@ http.createServer(function route(req, res) {
 						res.writeHead(200, {
 							"Content-Type": "application/json",
 							"Set-Cookie": output,
-							"Access-Control-Allow-Origin": "*",
+							"Access-Control-Allow-Origin": req.headers.origin,
 							"Access-Control-Allow-Credentials": "true",
 						})
 						res.end(JSON.stringify(item, null, 2))
@@ -82,7 +85,7 @@ http.createServer(function route(req, res) {
 						res.writeHead(500, {
 							"Content-Type": "application/json",
 							"Set-Cookie": output,
-							"Access-Control-Allow-Origin": "*",
+							"Access-Control-Allow-Origin": req.headers.origin,
 							"Access-Control-Allow-Credentials": "true",
 						})
 						res.end(JSON.stringify({message: error.message, stack: e.stack}, null, 2))
@@ -92,7 +95,7 @@ http.createServer(function route(req, res) {
 					// console.log(e)
 					res.writeHead((e && e.method) || 400, {
 						"Content-Type": "application/json",
-						"Access-Control-Allow-Origin": "*",
+						"Access-Control-Allow-Origin": req.headers.origin,
 						"Access-Control-Allow-Credentials": "true",
 					})
 					res.end(JSON.stringify({message: e.message, stack: e.stack}, null, 2))
@@ -101,7 +104,7 @@ http.createServer(function route(req, res) {
 		}
 		else if (req.method === "OPTIONS") {
 			res.writeHead(200, {
-				"Access-Control-Allow-Origin": "*",
+				"Access-Control-Allow-Origin": req.headers.origin,
 				"Access-Control-Allow-Credentials": "true",
 				"Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS",
 				"Access-Control-Allow-Headers": "Content-Type,Rem-Response-Status",
@@ -114,7 +117,7 @@ http.createServer(function route(req, res) {
 	catch (e) {
 		res.writeHead(e.method || 400, {
 			"Content-Type": "application/json",
-			"Access-Control-Allow-Origin": "*",
+			"Access-Control-Allow-Origin": req.headers.origin,
 			"Access-Control-Allow-Credentials": "true",
 		})
 		res.end(JSON.stringify({message: e.message, stack: e.stack}, null, 2))
@@ -123,7 +126,6 @@ http.createServer(function route(req, res) {
 
 function getData(cookieString) {
 	var cookieData = data
-	console.log(cookieString)
 	if (cookieString) {
 		var map = Cookie.parse(cookieString)
 		cookieData = JSON.parse(new Buffer(map["data"], 'base64').toString('utf8'))
