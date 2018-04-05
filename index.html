@@ -29,7 +29,7 @@ code {background:#fcf5e0;font-family:monospace;}
     <p>REM is a REST API for prototyping. It accepts JSON requests, returns JSON responses and persists data between requests like a real API. But your test data is only visible to you. It's <a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing">CORS</a> enabled and no API key is required.</p>
 
     <pre><code>var xhr = new XMLHttpRequest()
-xhr.open("GET", "http://rem-rest-api.herokuapp.com/api/users", true)
+xhr.open("GET", "https://rem.emilfolino.se/api/users", true)
 xhr.withCredentials = true
 xhr.send()
 xhr.onload = function() {
@@ -42,7 +42,7 @@ xhr.onload = function() {
 
     <h4 id="get-a-list-of-things">Get a list of things</h4>
 
-    <pre><code>GET http://rem-rest-api.herokuapp.com/api/[things]</code></pre>
+    <pre><code>GET https://rem.emilfolino.se/api/[things]</code></pre>
 
     <p>Results:</p>
 
@@ -65,13 +65,13 @@ xhr.onload = function() {
     <li><code>limit</code>: pagination size. Defaults to <code>10</code></li>
     </ul>
 
-    <pre><code>GET http://rem-rest-api.herokuapp.com/api/[things]?offset=1&amp;limit=10</code></pre>
+    <pre><code>GET https://rem.emilfolino.se/api/[things]?offset=1&amp;limit=10</code></pre>
 
     <hr />
 
     <h4 id="get-one-thing">Get one thing</h4>
 
-    <pre><code>GET http://rem-rest-api.herokuapp.com/api/[things]/1</code></pre>
+    <pre><code>GET https://rem.emilfolino.se/api/[things]/1</code></pre>
 
     <p>Results:</p>
 
@@ -85,7 +85,7 @@ xhr.onload = function() {
 
     <h4 id="create-new-thing">Create new thing</h4>
 
-    <pre><code>POST http://rem-rest-api.herokuapp.com/api/[things]
+    <pre><code>POST https://rem.emilfolino.se/api/[things]
 
 {"firstName": "Lorem", "lastName": "Ipsum"}</code></pre>
 
@@ -93,7 +93,7 @@ xhr.onload = function() {
 
     <h4 id="upsertreplace-thing">Upsert/replace thing</h4>
 
-    <pre><code>PUT http://rem-rest-api.herokuapp.com/api/[things]/1
+    <pre><code>PUT https://rem.emilfolino.se/api/[things]/1
 
 {"id": 1, "firstName": "Lorem", "lastName": "Ipsum"}</code></pre>
 
@@ -101,7 +101,7 @@ xhr.onload = function() {
 
     <h4 id="delete-thing">Delete thing</h4>
 
-    <pre><code>DELETE http://rem-rest-api.herokuapp.com/api/[things]/1</code></pre>
+    <pre><code>DELETE https://rem.emilfolino.se/api/[things]/1</code></pre>
 
     <hr />
 
