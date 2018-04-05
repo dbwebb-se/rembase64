@@ -1,6 +1,8 @@
 # REM REST API
 
-[API](#api) | [What REM offers](#what-rem-offers) | [Why REM](#why-rem) | [How it works](#how-it-works) | [About](#about) | [Try it](http://nodejs1.student.bth.se:8000)
+Adopted and changed version. Uses base64 to encode the Cookie. Originally created by [lhorie](https://github.com/lhorie) in the repo [lhorie/rem](https://github.com/lhorie/rem).
+
+[API](#api) | [What REM offers](#what-rem-offers) | [Why REM](#why-rem) | [How it works](#how-it-works) | [About](#about) | [Try it](https://rem.emilfolino.se)
 
 A starting point for big dreams.
 
@@ -8,7 +10,7 @@ REM is a REST API for prototyping. It accepts JSON requests, returns JSON respon
 
 ```javascript
 var xhr = new XMLHttpRequest()
-xhr.open("GET", "http://nodejs1.student.bth.se:8000/api/users", true)
+xhr.open("GET", "https://rem.emilfolino.se/api/users", true)
 xhr.withCredentials = true
 xhr.send()
 xhr.onload = function() {
@@ -23,11 +25,11 @@ xhr.onload = function() {
 #### Get a list of things
 
 ```
-GET http://nodejs1.student.bth.se:8000/api/users
+GET https://rem.emilfolino.se/api/users
 //or
-GET http://nodejs1.student.bth.se:8000/api/projects
+GET https://rem.emilfolino.se/api/projects
 //or
-GET http://nodejs1.student.bth.se:8000/api/[whatever]
+GET https://rem.emilfolino.se/api/[whatever]
 ```
 
 Results:
@@ -51,7 +53,7 @@ Optional querystring parameters:
 - `limit`: pagination size. Defaults to `10`
 
 ```
-GET http://nodejs1.student.bth.se:8000/api/[things]?offset=1&limit=10
+GET https://rem.emilfolino.se/api/[things]?offset=1&limit=10
 ```
 
 ---
@@ -59,7 +61,7 @@ GET http://nodejs1.student.bth.se:8000/api/[things]?offset=1&limit=10
 #### Get one thing
 
 ```
-GET http://nodejs1.student.bth.se:8000/api/[things]/1
+GET https://rem.emilfolino.se/api/[things]/1
 ```
 
 Results:
@@ -77,7 +79,7 @@ Results:
 #### Create new thing
 
 ```
-POST http://nodejs1.student.bth.se:8000/api/[things]
+POST https://rem.emilfolino.se/api/[things]
 
 {"firstName": "Lorem", "lastName": "Ipsum"}
 ```
@@ -87,7 +89,7 @@ POST http://nodejs1.student.bth.se:8000/api/[things]
 #### Upsert/replace thing
 
 ```
-PUT http://nodejs1.student.bth.se:8000/api/[things]/1
+PUT https://rem.emilfolino.se/api/[things]/1
 
 {"id": 1, "firstName": "Lorem", "lastName": "Ipsum"}
 ```
@@ -97,7 +99,7 @@ PUT http://nodejs1.student.bth.se:8000/api/[things]/1
 #### Delete thing
 
 ```
-DELETE http://nodejs1.student.bth.se:8000/api/[things]/1
+DELETE https://rem.emilfolino.se/api/[things]/1
 ```
 
 ---
