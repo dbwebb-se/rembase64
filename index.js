@@ -123,6 +123,7 @@ http.createServer(function route(req, res) {
 
 function getData(cookieString) {
 	var cookieData = data
+	console.log(cookieString)
 	if (cookieString) {
 		var map = Cookie.parse(cookieString)
 		cookieData = JSON.parse(new Buffer(map["data"], 'base64').toString('utf8'))
